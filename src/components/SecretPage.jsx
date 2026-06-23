@@ -53,12 +53,12 @@ export default function SecretPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <p className="font-sans text-sm md:text-base leading-relaxed text-charcoal/50">
-            This digital magazine was created for Annisa Safura&apos;s twenty-sixth birthday. Every element —
-            the typography, the pacing, the silence between pages — was designed to feel like a physical object
+            This digital magazine was created for Annisa Safura&apos;s twenty-sixth birthday. Every element,
+            the typography, the pacing, the silence between pages was designed to feel like a physical object
             existing in digital space.
           </p>
           <p className="font-sans text-sm md:text-base leading-relaxed text-charcoal/40">
-            Set in Playfair Display and Inter. Built with Next.js, Tailwind CSS, and Framer Motion.
+            Set in Playfair Display and Inter. Built by Macos.
           </p>
         </motion.div>
 
@@ -127,8 +127,8 @@ export default function SecretPage() {
                   transition={{ duration: 0.5, delay: 0.35 }}
                 >
                   <p className="font-serif text-2xl md:text-3xl italic text-charcoal/70 leading-relaxed mb-6">
-                    &ldquo;You are the best thing that has ever happened to me. Every year with you is a gift I
-                    never take for granted. Happy 26th. I love you.&rdquo;
+                    &ldquo;You are one of the best thing that has ever happened to me. Thank you for all the journey
+                    we had together. Happy 26th!&rdquo;
                   </p>
                 </motion.div>
 

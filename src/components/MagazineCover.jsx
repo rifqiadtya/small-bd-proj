@@ -68,7 +68,7 @@ export default function MagazineCover() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.6 }}
           >
-            This page is intentionally sparse. A cover needs no explanation.
+            {/* This page is intentionally sparse. A cover needs no explanation. */}
           </motion.div>
         </motion.div>
 
@@ -83,6 +83,10 @@ export default function MagazineCover() {
               src="/images/photo-1.jpg"
               alt="Annisa Safura — Cover Portrait"
               className="w-full h-full object-cover object-center"
+              style={{
+                objectPosition: `calc(50% + 0px) calc(50% + -100px)`,
+                transform: `scale(1.1)`,
+              }}
             />
           </div>
         </motion.div>

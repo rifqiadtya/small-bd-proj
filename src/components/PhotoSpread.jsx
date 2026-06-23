@@ -1,36 +1,38 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+// ponytail: tweak `x`/`y` (px) to shift, `zoom` (scale factor, default 1) to enlarge within grid cell
 const PHOTOS = [
   {
     id: 1, src: '/images/photo-2.jpg',
-    type: 'portrait', span: 'col-span-2 row-span-2',
+    type: 'portrait', span: 'col-span-2 row-span-2', x: -30, y: 0, zoom: 1.2,
     caption: 'Editorial portrait — natural light, candid composure.',
   },
   {
     id: 2, src: '/images/photo-3.jpg',
-    type: 'landscape', span: 'col-span-2 row-span-2',
-    caption: 'Environmental frame — a quiet moment in the afternoon.',
-  },
-  {
-    id: 3, src: '/images/photo-4.jpg',
-    type: 'portrait', span: 'col-span-1 row-span-2',
+    type: 'landscape', span: 'col-span-2 row-span-2', x: 0, y: -100, zoom: 1,
     caption: 'Detail study — texture and shadow interplay.',
   },
   {
-    id: 4, src: '/images/photo-5.jpg',
-    type: 'landscape', span: 'col-span-2 row-span-1',
+    id: 3, src: '/images/photo-6.jpg',
+    type: 'portrait', span: 'col-span-1 row-span-2', x: 0, y: -50, zoom: 1,
+    caption: 'Environmental frame — a quiet moment in the afternoon.',
+  },
+  {
+    id: 4, src: '/images/photo-7.jpg',
+    type: 'landscape', span: 'col-span-2 row-span-1', x: 0, y: -120, zoom: 1,
     caption: 'Wide composition — space, light, and stillness.',
   },
   {
-    id: 5, src: '/images/photo-6.jpg',
-    type: 'portrait', span: 'col-span-1 row-span-2',
+    id: 5, src: '/images/photo-4.jpg',
+    type: 'portrait', span: 'col-span-1 row-span-2', x: 0, y: 0, zoom: 1,
     caption: 'Close portrait — intimate and direct.',
   },
   {
-    id: 6, src: '/images/photo-7.jpg',
-    type: 'landscape', span: 'col-span-2 row-span-1',
+    id: 6, src: '/images/photo-5.jpg',
+    type: 'landscape', span: 'col-span-2 row-span-1', x: 0, y: -150, zoom: 1,
     caption: 'Final frame — the closing image of the spread.',
   },
 ]
@@ -48,7 +50,25 @@ const item = {
 }
 
 export default function PhotoSpread() {
+  const [zoomed, setZoomed] = useState(null)
+
+  useEffect(() => {
+    if (!zoomed) return
+    const handler = (e) => { if (e.key === 'Escape') setZoomed(null) }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [zoomed])
+
   return (
+    <>
+    {zoomed && (
+      <div
+        className="fixed inset-0 z-[400] flex items-center justify-center bg-black/80 cursor-zoom-out"
+        onClick={() => setZoomed(null)}
+      >
+        <img src={zoomed.src} alt={zoomed.caption} className="max-h-[90vh] max-w-[90vw] object-contain" />
+      </div>
+    )}
     <div className="w-full h-full bg-ivory overflow-y-auto">
       <div className="min-h-full px-4 md:px-8 lg:px-12 py-8 md:py-10">
         <motion.div
@@ -78,11 +98,17 @@ export default function PhotoSpread() {
               variants={item}
               className={`${photo.span} relative overflow-hidden group`}
             >
-              <img
-                src={photo.src}
-                alt={photo.caption}
-                className="w-full h-full object-cover object-center"
-              />
+              <div className="w-full h-full overflow-hidden cursor-zoom-in" onClick={() => setZoomed(photo)}>
+                <img
+                  src={photo.src}
+                  alt={photo.caption}
+                  className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: `calc(50% + ${photo.x}px) calc(50% + ${photo.y}px)`,
+                    transform: `scale(${photo.zoom})`,
+                  }}
+                />
+              </div>
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3"
                 style={{
@@ -113,5 +139,6 @@ export default function PhotoSpread() {
         </motion.div>
       </div>
     </div>
+    </>
   )
 }
