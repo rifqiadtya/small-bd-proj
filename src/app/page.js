@@ -11,7 +11,6 @@ import MagazineCover from '@/components/MagazineCover'
 import PhotoSpread from '@/components/PhotoSpread'
 import MemoryPage from '@/components/MemoryPage'
 import LetterSpread from '@/components/LetterSpread'
-import WishesPage from '@/components/WishesPage'
 import SecretPage from '@/components/SecretPage'
 import ClosingSection from '@/components/ClosingSection'
 
@@ -65,7 +64,6 @@ export default function Home() {
             <PhotoSpread />
             <MemoryPage />
             <LetterSpread />
-            <WishesPage />
             <SecretPage />
             <ClosingSection />
           </PageTurn>
